@@ -6,7 +6,7 @@ delay = 10
 #in sec
 runtime = 20
 timestep = 1.0
-current = 100 #in muA
+potential = 1 #in V
 
 KE = KeithleyExperiment ()
-KE.testing_sourcecurrent(channel, delay, runtime, timestep, potential)
+KE.testing_sourcevoltage(channel, delay, runtime, timestep, potential)
