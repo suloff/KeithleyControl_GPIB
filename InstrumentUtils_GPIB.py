@@ -2,7 +2,7 @@
 #date: 2010-10-21 author: susi
 #Pulsing voltage and measuring current
 
-import visa
+import pyvisa as visa
 
 class InstrumentUtils:
     """Instrument utilities to control Keithley2602"""
