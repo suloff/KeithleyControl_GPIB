@@ -10,8 +10,8 @@ class KeithleyExperiment(InstrumentControl):
 
     def __init__(self):
         InstrumentControl.__init__(self)
-        #self.timestring = str(datetime.datetime.now())[0:19].replace(":", "-").replace(" ", "_")
-        #self.filename = self.timestring + ".txt"
+        self.timestring = str(datetime.datetime.now())[0:19].replace(":", "-").replace(" ", "_")
+        self.filename = self.timestring + ".txt"
 
 #########################################################
 ####TESTING
@@ -71,7 +71,7 @@ class KeithleyExperiment(InstrumentControl):
             self.keithley.write(ch + ".source.levelv = 0.0")
             self.keithley.write(ch + ".measure.i(buffer)")
 
-            data = self.keithley.ask_for_values("printbuffer(1, " + str(buffersize) + ", buffer.readings, buffer.sourcevalues, buffer.timestamps)")
+            data = self.keithley.query_values("printbuffer(1, " + str(buffersize) + ", buffer.readings, buffer.sourcevalues, buffer.timestamps)")
 
 
             self.keithley.write("buffer.clear()")

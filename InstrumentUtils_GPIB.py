@@ -2,7 +2,7 @@
 #date: 2010-10-21 author: susi
 #Pulsing voltage and measuring current
 
-import pyvisa as visa
+import visa
 
 class InstrumentUtils:
     """Instrument utilities to control Keithley2602"""
@@ -17,8 +17,8 @@ class InstrumentUtils:
 
     def connectToKeithley(self):
         rm = visa.ResourceManager()
-        keithley = rm.open_resource(self.portID)
-        print(keithley.query("*IDN?"))
+        keithley = rm.get_instrument(self.portID)
+        #print(keithley.write("*IDN?"))
         return(keithley)
 
     def reset(self):
