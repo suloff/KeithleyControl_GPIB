@@ -66,13 +66,15 @@ class KeithleyExperiment(InstrumentControl):
 
         self.outputON(channel)
 
+        print("writing works")
+
         tzero = time.time()
         while time.time()-tzero < delay:
             self.keithley.write(ch + ".source.levelv = 0.0")
             self.keithley.write(ch + ".measure.i(buffer)")
 
-            data = self.keithley.query_values("printbuffer(1, " + str(buffersize) + ", buffer.readings, buffer.sourcevalues, buffer.timestamps)")
-
+            data = self.keithley.query_ascii_values("printbuffer(1, " + str(buffersize) + ", buffer.readings, buffer.sourcevalues, buffer.timestamps)")
+            print(data)
 
             self.keithley.write("buffer.clear()")
 
@@ -85,7 +87,8 @@ class KeithleyExperiment(InstrumentControl):
             self.keithley.write(ch + ".source.levelv = " + str(potential))
             self.keithley.write(ch + ".measure.i(buffer)")
 
-            data = self.keithley.ask_for_values("printbuffer(1, " + str(buffersize) + ", buffer.readings, buffer.sourcevalues, buffer.timestamps)")
+            data = self.keithley.query_ascii_values("printbuffer(1, " + str(buffersize) + ", buffer.readings, buffer.sourcevalues, buffer.timestamps)")
+            print(data)
 
             self.keithley.write("buffer.clear()")
 
